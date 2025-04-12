@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Exchange Platform - Project Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset và font chữ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        
+        /* Container chính */
+        .project-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .project-detail-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #405ff4, #f791e7);
+            color: white;
+            position: relative;
+        }
+        
+        .project-detail-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-3px);
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+        }
+        
+        /* Nội dung chính */
+        .project-detail-content {
+            display: block;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        
+        /* Image Gallery */
+        .project-gallery {
+            flex: 1;
+            min-width: 300px;
+            margin-right: 30px;
+        }
+        
+        .main-image {
+            width: 100%;
+            object-fit: contain;
+            height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .thumbnail-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #4361ee;
+        }
+        
+        .thumbnail.active {
+            border-color: #4361ee;
+            box-shadow: 0 0 0 2px #4361ee;
+        }
+        
+        /* Thông tin dự án */
+        .project-detail-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .project-detail-info h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4361ee;
+        }
+        
+        .project-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .project-features h3,
+        .project-technologies h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            color: #2d3748;
+        }
+        
+        .project-features ul {
+            list-style-position: inside;
+            margin-bottom: 25px;
+        }
+        
+        .project-features li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tech-tag {
+            padding: 6px 12px;
+            background-color: #4361ee;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .live-demo-button,
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .live-demo-button {
+            background-color: #4361ee;
+            color: white;
+        }
+        
+        .live-demo-button:hover {
+            background-color: #3a56d4;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .github-button {
+            background-color: #2d3748;
+            color: white;
+        }
+        
+        .github-button:hover {
+            background-color: #1a202c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 55, 72, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-detail-content {
+                flex-direction: column;
+            }
+            
+            .project-gallery {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .thumbnail-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .project-detail-header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .thumbnail-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="project-detail-container">
+        <div class="project-detail-header">
+            <h1>🖥️ Online Classroom Management Website</h1>
+            <p class="project-date">(04/2024 – 02/2025)</p>
+            <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+
+        <div class="project-detail-content">
+            <div class="project-gallery">
+                <!-- Ảnh chính -->
+                <img id="mainImage" src="./onlyAclassroom/396360160-157f4ecb-a9a8-49fd-8cb1-4b6395b2ca49.png" alt="Skill Exchange Platform" class="main-image">
+                
+                <!-- Danh sách thumbnail -->
+                <div class="thumbnail-container">
+                    <img src="./onlyAclassroom/396360160-157f4ecb-a9a8-49fd-8cb1-4b6395b2ca49.png" alt="Screenshot 1" class="thumbnail active" onclick="changeImage(this, './onlyAclassroom/396360160-157f4ecb-a9a8-49fd-8cb1-4b6395b2ca49.png')">
+                    <img src="./onlyAclassroom/396360639-466622a6-60bf-410b-8b83-5104d12cd898.png" alt="Screenshot 2" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396360639-466622a6-60bf-410b-8b83-5104d12cd898.png')">
+                    <img src="./onlyAclassroom/396360755-ee27c53e-faa2-4727-a512-6b30d74588f0.png" alt="Screenshot 3" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396360755-ee27c53e-faa2-4727-a512-6b30d74588f0.png')">
+                    <img src="./onlyAclassroom/396361000-d1ef1dc8-f544-4ee9-ba28-0dec15e105ff.png" alt="Screenshot 4" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396361000-d1ef1dc8-f544-4ee9-ba28-0dec15e105ff.png')">
+                    <img src="./onlyAclassroom/396361245-e92358bf-616c-4585-98fc-c64d682f76c6.png" alt="Screenshot 5" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396361245-e92358bf-616c-4585-98fc-c64d682f76c6.png')">
+                    <img src="./onlyAclassroom/396362806-c3d614db-4b37-4214-9af7-d0918a9dc182.png" alt="Screenshot 6" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396362806-c3d614db-4b37-4214-9af7-d0918a9dc182.png')">
+                    <img src="./onlyAclassroom/396363112-de25f83c-546b-4112-9df6-0e3b78ff15cd.png" alt="Screenshot 7" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396363112-de25f83c-546b-4112-9df6-0e3b78ff15cd.png')">
+                    <img src="./onlyAclassroom/396361920-037bc865-e0cc-4913-96f3-b4b916eac5e5.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396361920-037bc865-e0cc-4913-96f3-b4b916eac5e5.png')">
+                    <img src="./onlyAclassroom/396362203-5477c50e-ab71-4fb5-8b6c-5a27e4106ec1.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396362203-5477c50e-ab71-4fb5-8b6c-5a27e4106ec1.png')">
+                    <img src="./onlyAclassroom/396362288-25c3cd84-3983-48db-83d8-6f0d97b51233.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396362288-25c3cd84-3983-48db-83d8-6f0d97b51233.png')">
+                    <img src="./onlyAclassroom/396362445-4a6cf23d-72a4-4d24-b163-5aae68b6ea93.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396362445-4a6cf23d-72a4-4d24-b163-5aae68b6ea93.png')">
+                    <img src="./onlyAclassroom/396362590-cf227edd-ab60-4a92-88a0-150e19efdf20.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396362590-cf227edd-ab60-4a92-88a0-150e19efdf20.png')">
+                    <img src="./onlyAclassroom/396362696-87e87c0c-6462-4518-947f-0a87bc91abce.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396362696-87e87c0c-6462-4518-947f-0a87bc91abce.png')">
+                    <img src="./onlyAclassroom/396363241-2584a912-1c81-435c-bc1c-6a30adf998df.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396363241-2584a912-1c81-435c-bc1c-6a30adf998df.png')">
+                    <img src="./onlyAclassroom/396427005-fe09094d-3f88-4bd0-9bc9-9bdcc8369eb9.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './onlyAclassroom/396427005-fe09094d-3f88-4bd0-9bc9-9bdcc8369eb9.png')">
+                    
+                </div>
+            </div>
+
+            <div class="project-detail-info">
+                <h2>Project Overview</h2>
+                <p class="project-description">A web-based platform for online learning with features such as virtual classrooms, assignments, lectures, and student interactions.
+                </p>
+                <div class="project-technologies">
+                    <h3>Technologies Used:</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">ASP.NET Core MVC</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">Entity Framework Core</span>
+                        <span class="tech-tag">SignalR</span>
+                        <span class="tech-tag">Stringee</span>
+                        <span class="tech-tag">ZXing</span>
+                    </div>
+                </div>
+
+                <div class="project-features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>🔸 Online Meeting System<br>
+                            <span style="margin-left: 50px;">✔ Integrated SignalR for real-time messaging and presence tracking between users.</span><br>
+                            <span style="margin-left: 50px;">✔ Used Stringee SDK to implement audio/video calling, enabling live virtual classes.</span><br>
+                            <span style="margin-left: 50px;">✔ Managed meeting rooms and user permissions for secure communication.</span>
+                        </li>
+                        <li>🔸 Assignment & Lecture Management<br>
+                            <span style="margin-left: 50px;">✔ Developed a full-featured assignment submission system: teachers can create, assign, and grade tasks; students can upload submissions.</span><br>
+                            <span style="margin-left: 50px;">✔ Built a lecture content manager, allowing teachers to upload materials (PDF, Word, excel).</span><br>
+                            <span style="margin-left: 50px;">✔ Added file validation, deadline tracking, and status monitoring for each student.</span>
+                        </li>
+                        <li>🔸 Classroom & Timetable Management<br>
+                            <span style="margin-left: 50px;">✔ Created modules to manage multiple classes, each with different teachers, subjects, and schedules.</span><br>
+                            <span style="margin-left: 50px;">✔ Integrated ZXing for QR code generation to support class check-in/attendance via scanning.</span>
+                        </li>
+                        <li>🔸 Chat & Notification Features<br>
+                            <span style="margin-left: 50px;">✔ Built a real-time chat system for student-teacher interaction within classrooms.</span><br>
+                            <span style="margin-left: 50px;">✔ Integrated notifications for new assignments, lectures, and messages using SignalR.</span><br>
+                        </li>
+                        <li>🔸 Post & Announcement System<br>
+                            <span style="margin-left: 50px;">✔ Teachers can post class announcements or articles.</span><br>
+                            <span style="margin-left: 50px;">✔ Built storage and display logic for posts with timestamps and attachments.</span><br>
+                            <span style="margin-left: 50px;">✔ Allowed comment interaction from students under posts.</span>
+                        </li>
+                        <li>🔸 User Roles & Authorization<br>
+                            <span style="margin-left: 50px;">✔ Implemented role-based access control for Admin, Teacher, and Student.</span><br>
+                            <span style="margin-left: 50px;">✔ Built secure login and registration flows with validation and session management.</span><br>
+                            <span style="margin-left: 50px;">✔ Ensured users see different dashboards and functionalities based on their roles.</span>
+                        </li>
+                        <li>🔸 Admin Panel<br>
+                            <span style="margin-left: 50px;">✔ Developed a dashboard for admins to monitor user activity, manage accounts, reset passwords, and moderate content.</span><br>
+                            <span style="margin-left: 50px;">✔ Implemented data charts and statistics using server-side queries and stored procedures.</span><br>
+                            <span style="margin-left: 50px;">✔ Ensured users see different dashboards and functionalities based on their roles.</span>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div class="project-features">
+                    <h3>Functions I Have Implemented:</h3>
+                    <ul>
+                        <li>✅ Post & Announcement System</li>         
+                        <li>✅ Developed a full-featured assignment submission system: teachers can create, assign, and grade tasks; students can upload submissions.</li>
+                        <li>✅ Build functionality to reuse and distribute lectures and exercises</li>  
+                    </ul>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" class="live-demo-button"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/HongVi711/Online_Classroom_Management_Website.git" class="github-button"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function để thay đổi ảnh chính khi click vào thumbnail
+        function changeImage(thumbnail, imageSrc) {
+            // Đổi ảnh chính
+            document.getElementById('mainImage').src = imageSrc;
+            
+            // Xóa class active từ tất cả thumbnail
+            document.querySelectorAll('.thumbnail').forEach(img => {
+                img.classList.remove('active');
+            });
+            
+            // Thêm class active vào thumbnail được click
+            thumbnail.classList.add('active');
+        }
+        
+        // Thêm hiệu ứng khi load trang
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.project-detail-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            container.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Exchange Platform - Project Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset và font chữ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        
+        /* Container chính */
+        .project-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .project-detail-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #cc4e11, #ffee40);
+            color: white;
+            position: relative;
+        }
+        
+        .project-detail-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-3px);
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+        }
+        
+        /* Nội dung chính */
+        .project-detail-content {
+            display: block;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        
+        /* Image Gallery */
+        .project-gallery {
+            flex: 1;
+            min-width: 300px;
+            margin-right: 30px;
+        }
+        
+        .main-image {
+            width: 100%;
+            object-fit: contain;
+            height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .thumbnail-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #4361ee;
+        }
+        
+        .thumbnail.active {
+            border-color: #4361ee;
+            box-shadow: 0 0 0 2px #4361ee;
+        }
+        
+        /* Thông tin dự án */
+        .project-detail-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .project-detail-info h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4361ee;
+        }
+        
+        .project-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .project-features h3,
+        .project-technologies h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            color: #2d3748;
+        }
+        
+        .project-features ul {
+            list-style-position: inside;
+            margin-bottom: 25px;
+        }
+        
+        .project-features li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tech-tag {
+            padding: 6px 12px;
+            background-color: #4361ee;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .live-demo-button,
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .live-demo-button {
+            background-color: #4361ee;
+            color: white;
+        }
+        
+        .live-demo-button:hover {
+            background-color: #3a56d4;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .github-button {
+            background-color: #2d3748;
+            color: white;
+        }
+        
+        .github-button:hover {
+            background-color: #1a202c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 55, 72, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-detail-content {
+                flex-direction: column;
+            }
+            
+            .project-gallery {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .thumbnail-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .project-detail-header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .thumbnail-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="project-detail-container">
+        <div class="project-detail-header">
+            <h1>🎮 Olympia Game</h1>
+            <p class="project-date">(26/11/2024 - 07/01/2025)</p>
+            <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+
+        <div class="project-detail-content">
+            <div class="project-gallery">
+                <!-- Ảnh chính -->
+                <img id="mainImage" src="aa686fcd9d726fedf4a1642a95917904.jpg" alt="Skill Exchange Platform" class="main-image">
+                
+                <!-- Danh sách thumbnail -->
+                <!-- <div class="thumbnail-container">
+                    <img src="./mobileEnglish/402678451-4a950456-65b7-45be-928d-acded7462dbb.png" alt="Screenshot 1" class="thumbnail active" onclick="changeImage(this, './mobileEnglish/402678451-4a950456-65b7-45be-928d-acded7462dbb.png')">
+                    <img src="./mobileEnglish/402678658-17c62d1c-78c0-42fe-af52-d3fba8fea406.png" alt="Screenshot 2" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402678658-17c62d1c-78c0-42fe-af52-d3fba8fea406.png')">
+                    <img src="./mobileEnglish/402678711-87658228-8571-4f05-8209-0a082795e932.png" alt="Screenshot 3" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402678711-87658228-8571-4f05-8209-0a082795e932.png')">
+                    <img src="./mobileEnglish/402679002-9b456191-15cd-4ff3-a926-89d7ec269dcb.png" alt="Screenshot 4" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679002-9b456191-15cd-4ff3-a926-89d7ec269dcb.png')">
+                    <img src="./mobileEnglish/402679124-c11a5ffc-39e1-4e17-8942-acb3590c368d.png" alt="Screenshot 5" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679124-c11a5ffc-39e1-4e17-8942-acb3590c368d.png')">
+                    <img src="./mobileEnglish/402679219-8eafab68-5bac-48d0-959e-c6a1669a0b5f.png" alt="Screenshot 6" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679219-8eafab68-5bac-48d0-959e-c6a1669a0b5f.png')">
+                    <img src="./mobileEnglish/402679322-e6c28a47-5715-4e3b-a3ba-b04a02508947.png" alt="Screenshot 7" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679322-e6c28a47-5715-4e3b-a3ba-b04a02508947.png')">
+                    <img src="./mobileEnglish/402679432-f82f5d6f-2b81-48c2-bda8-071233f8a302.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679432-f82f5d6f-2b81-48c2-bda8-071233f8a302.png')">
+                    <img src="./mobileEnglish/402679551-226947f8-281a-4c8e-b080-5da6c554fecf.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679551-226947f8-281a-4c8e-b080-5da6c554fecf.png')">
+                    <img src="./mobileEnglish/402679651-032c86b9-5fb7-43f8-96eb-c9357e046f9d.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679651-032c86b9-5fb7-43f8-96eb-c9357e046f9d.png')">
+                    <img src="./mobileEnglish/402679755-bb0d4a22-2fe4-4ba7-b50d-f60a2158aad5.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679755-bb0d4a22-2fe4-4ba7-b50d-f60a2158aad5.png')">
+                    <img src="./mobileEnglish/402679852-7c8a2d44-0b8c-4873-8438-0e0c51b0be6f.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679852-7c8a2d44-0b8c-4873-8438-0e0c51b0be6f.png')">
+                    <img src="./mobileEnglish/402679950-51663e3a-aa80-4ab5-a52b-e72890053990.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './mobileEnglish/402679950-51663e3a-aa80-4ab5-a52b-e72890053990.png')">
+                </div> -->
+            </div>
+
+            <div class="project-detail-info">
+                <h2>Project Overview</h2>
+                <p class="project-description">A multiplayer quiz game inspired by "Road to Olympia" TV show, where players answer questions and compete in real-time.
+                </p>
+                <div class="project-technologies">
+                    <h3>Technologies Used:</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Java Swing</span>
+                        <span class="tech-tag">JavaFX</span>
+                        <span class="tech-tag">Socket TCP/IP</span>
+                    </div>
+                </div>
+
+                <div class="project-features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li> Designed a multiplayer communication system using TCP/IP Socket. </li>
+                        <li> Implemented question and score management with an automated calculation system.</li>
+                        <li> Developed a player management system, including registration, login, and score tracking.</li>
+                        
+                    </ul>
+                </div>
+
+                <div class="project-features">
+                    <h3>Note:</h3>
+                    <p class="project-description">Currently only server and client Server has grouping, answering questions, sending questions by file, calculating scores for each question Client enters name to start, selects answer, and displays score</p>
+                </div>
+
+
+                
+                <div class="project-links">
+                    <a href="#" class="live-demo-button"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/HongVi711/OnlyA_GameShow.git" class="github-button"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function để thay đổi ảnh chính khi click vào thumbnail
+        function changeImage(thumbnail, imageSrc) {
+            // Đổi ảnh chính
+            document.getElementById('mainImage').src = imageSrc;
+            
+            // Xóa class active từ tất cả thumbnail
+            document.querySelectorAll('.thumbnail').forEach(img => {
+                img.classList.remove('active');
+            });
+            
+            // Thêm class active vào thumbnail được click
+            thumbnail.classList.add('active');
+        }
+        
+        // Thêm hiệu ứng khi load trang
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.project-detail-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            container.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Exchange Platform - Project Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset và font chữ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        
+        /* Container chính */
+        .project-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .project-detail-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #4361ee, #e72c4d);
+            color: white;
+            position: relative;
+        }
+        
+        .project-detail-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-3px);
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+        }
+        
+        /* Nội dung chính */
+        .project-detail-content {
+            display: block;
+            flex-wrap: wrap;
+            padding: 30px;
+        }
+        
+        /* Image Gallery */
+        .project-gallery {
+            flex: 1;
+            min-width: 300px;
+            margin-right: 30px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .thumbnail-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #4361ee;
+        }
+        
+        .thumbnail.active {
+            border-color: #4361ee;
+            box-shadow: 0 0 0 2px #4361ee;
+        }
+        
+        /* Thông tin dự án */
+        .project-detail-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .project-detail-info h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4361ee;
+        }
+        
+        .project-description {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .project-features h3,
+        .project-technologies h3 {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            color: #2d3748;
+        }
+        
+        .project-features ul {
+            list-style-position: inside;
+            margin-bottom: 25px;
+        }
+        
+        .project-features li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tech-tag {
+            padding: 6px 12px;
+            background-color: #4361ee;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .live-demo-button,
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .live-demo-button {
+            background-color: #4361ee;
+            color: white;
+        }
+        
+        .live-demo-button:hover {
+            background-color: #3a56d4;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .github-button {
+            background-color: #2d3748;
+            color: white;
+        }
+        
+        .github-button:hover {
+            background-color: #1a202c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 55, 72, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-detail-content {
+                flex-direction: column;
+            }
+            
+            .project-gallery {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .thumbnail-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .project-detail-header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .thumbnail-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="project-detail-container">
+        <div class="project-detail-header">
+            <h1>💡 Skill Exchange Platform</h1>
+            <p class="project-date">(20/02/2025 - Now)</p>
+            <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+
+        <div class="project-detail-content">
+            <div class="project-gallery">
+                <!-- Ảnh chính -->
+                <img id="mainImage" src="488829973_1219653796501098_490170026542916442_n.jpg" alt="Skill Exchange Platform" class="main-image">
+                
+                <!-- Danh sách thumbnail -->
+                <div class="thumbnail-container">
+                    <img src="./skillexchange/Picture1.png" alt="Screenshot 1" class="thumbnail active" onclick="changeImage(this, './skillexchange/Picture1.png')">
+                    <img src="./skillexchange/Picture2.png" alt="Screenshot 2" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture2.png')">
+                    <img src="./skillexchange/Picture3.png" alt="Screenshot 3" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture3.png')">
+                    <img src="./skillexchange/Picture4.png" alt="Screenshot 4" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture4.png')">
+                    <img src="./skillexchange/Picture5.png" alt="Screenshot 5" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture5.png')">
+                    <img src="./skillexchange/Picture6.png" alt="Screenshot 6" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture6.png')">
+                    <img src="./skillexchange/Picture7.png" alt="Screenshot 7" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture7.png')">
+                    <img src="./skillexchange/Picture8.png" alt="Screenshot 8" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture8.png')">
+                    <img src="./skillexchange/Picture9.png" alt="Screenshot 9" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture9.png')">
+                    <img src="./skillexchange/Picture10.png" alt="Screenshot 10" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture10.png')">
+                    <img src="./skillexchange/Picture11.png" alt="Screenshot 11" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture11.png')">
+                    <img src="./skillexchange/Picture12.png" alt="Screenshot 12" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture12.png')">
+                    <img src="./skillexchange/Picture13.png" alt="Screenshot 13" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture13.png')">
+                    <img src="./skillexchange/Picture14.png" alt="Screenshot 14" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture14.png')">
+                    <img src="./skillexchange/Picture15.png" alt="Screenshot 15" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture15.png')">
+                    <img src="./skillexchange/Picture16.png" alt="Screenshot 16" class="thumbnail" onclick="changeImage(this, './skillexchange/Picture16.png')">
+                </div>
+            </div>
+
+            <div class="project-detail-info">
+                <h2>Project Overview</h2>
+                <p class="project-description">A platform that connects users to exchange skills without using money, using a matching system based on skills and interests. This project was developed as part of my portfolio to demonstrate full-stack development capabilities.</p>
+                <div class="project-technologies">
+                    <h3>Technologies Used:</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Socket.IO</span>
+                        <span class="tech-tag">Express.js</span>
+                        <span class="tech-tag">JWT Authentication</span>
+                    </div>
+                </div>
+                <div class="project-features">
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>🔸 User Matching & Search System<br>
+                            <span style="margin-left: 50px;">✔ Built advanced search functionality by name, skills, and location (area).</span><br>
+                            <span style="margin-left: 50px;">✔ Implemented skill-based matching logic to suggest suitable exchange partners</span>
+                        </li>
+                        <li>🔸 Real-time Messaging & Communication<br>
+                            <span style="margin-left: 50px;">✔ Integrated Socket.IO for real-time chat between users.</span><br>
+                            <span style="margin-left: 50px;">✔ Built message storage and resend system using MongoDB to ensure message persistence when users rejoin.</span><br>
+                            <span style="margin-left: 50px;">✔ Enabled notification system to alert users of new messages and connection requests.</span>
+                        </li>
+                        <li>🔸 Video Call Functionality<br>
+                            <span style="margin-left: 50px;">✔ Designed structure for integrating video calling feature (using WebRTC).</span><br>
+                            <span style="margin-left: 50px;">✔ Prepared user interface and socket logic to support future video communication.</span>
+                        </li>
+                        <li>🔸  User Profile Management<br>
+                            <span style="margin-left: 50px;">✔ Developed functionalities for users to update personal information, including skills, bio, location, and profile picture.</span><br>
+                            <span style="margin-left: 50px;">✔ Built dynamic profile pages to show user stats and reputation.</span>
+                        </li>
+                        <li>🔸 Schedule & Learning Sessions<br>
+                            <span style="margin-left: 50px;">✔ Added feature to create and manage learning schedules between users.</span><br>
+                            <span style="margin-left: 50px;">✔ Stored and displayed learning appointments with date/time reminders.</span>
+                        </li>
+                        <li>🔸 Admin Dashboard<br>
+                            <span style="margin-left: 50px;">✔ Created an admin panel to view, search, and manage all registered users.</span><br>
+                            <span style="margin-left: 50px;">✔ Implemented role-based access control to restrict admin functions.</span>
+                        </li>
+                        <li>🔸 Additional Features<br>
+                            <span style="margin-left: 50px;">✔ Developed secure authentication system using JWT and bcrypt.</span><br>
+                            <span style="margin-left: 50px;">✔ Validated user inputs and handled backend error responses clearly.</span><br>
+                            <span style="margin-left: 50px;">✔ Designed RESTful APIs to support frontend functionality.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="project-features">
+                    <h3>Functions I Have Implemented:</h3>
+                    <ul>
+                        <li>✅Implemented skill-based matching logic to suggest suitable exchange partners </li>         
+                        <li>✅Real-time Messaging & Communication<br></li>
+                        <li>✅Video Call Functionality</li>  
+                        <li>✅Designed RESTful APIs</li>      
+                    </ul>
+                </div>
+
+                <div class="project-features">
+                    <h3>Future Development:</h3>
+                    <ul>
+                        <li>⭐AI Integration:<br>
+                            <span style="margin-left: 50px;">Incorporate AI to enhance user experience through intelligent matching and recommendations based on learning goals, skill levels, and past interactions.</span>
+                        </li>         
+                        <li>⭐Smart Search Suggestions:<br>
+                            <span style="margin-left: 50px;">Upgrade the search feature to support real-time, AI-powered suggestions when users look for partners by skills, location, or learning preferences.</span>
+                        </li>
+                        <li>⭐Automatic Study Schedule Generator:<br>
+                            <span style="margin-left: 50px;">Implement a smart scheduling assistant that analyzes users’ free time and automatically generates optimal study plans.</span>
+                        </li>
+                        <li>⭐SkillExchange Social Network:<br>
+                            <span style="margin-left: 50px;">Build a dedicated community space where users can create posts, share learning resources, and engage in discussions—turning the platform into a true learning ecosystem.</span>
+                        </li>
+                        <li>⭐Personal Schedule Management:<br>
+                            <span style="margin-left: 50px;">Add a personal schedule feature where users can manage their availability, sync with Google Calendar, and receive reminders for upcoming sessions.</span>
+                        </li>    
+                    </ul>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" class="live-demo-button"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/HongVi711/DACK_SkillExchange.git" class="github-button"><i class="fab fa-github"></i> View FE on GitHub</a>
+                    <a href="https://github.com/HongVi711/Skill-Exchange-Website-BE.git" class="github-button"><i class="fab fa-github"></i> View BE on GitHub</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function để thay đổi ảnh chính khi click vào thumbnail
+        function changeImage(thumbnail, imageSrc) {
+            // Đổi ảnh chính
+            document.getElementById('mainImage').src = imageSrc;
+            
+            // Xóa class active từ tất cả thumbnail
+            document.querySelectorAll('.thumbnail').forEach(img => {
+                img.classList.remove('active');
+            });
+            
+            // Thêm class active vào thumbnail được click
+            thumbnail.classList.add('active');
+        }
+        
+        // Thêm hiệu ứng khi load trang
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.project-detail-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(20px)';
+            container.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
